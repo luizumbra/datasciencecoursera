@@ -14,7 +14,7 @@ complete <- function(directory, id = 1:332) {
   ## number of complete cases
   
   # Anonymous function
-  nobsResult <- lapply(id, function(x) {
+  nobsResult <- do.call("rbind", lapply(id, function(x) {
     
     # Develop the standard file names
     filename <- if(x < 10) {
@@ -39,9 +39,14 @@ complete <- function(directory, id = 1:332) {
     nobsVec <- c(as.integer(x), as.integer(sum(as.integer(nobsBool))))
     names(nobsVec) <- c("id", "nobs")
     nobsVec
-  })
+  }))
   
-  nobsResult <- as.data.frame(nobsResult)
-  #names(nobsResult) <- c("id", "nobs")
-  nobsResult
+#  as.array.default(nobsResult)
+  #as.vector.factor(nobsResult)
+  as.data.frame.array(nobsResult)
+#  as.data.frame.list(nobsResult)
+#  as.table.default(nobsResult)
+  #as.vector.factor(nobsResult)
+  #as.personList(nobsResult)
+  #nobsResult
 }
