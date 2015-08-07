@@ -36,10 +36,12 @@ complete <- function(directory, id = 1:332) {
     nobsBool <- nobsSulfate & nobsNitrate
     
     ## Create the specified array with id, nobs and the respective names
-    nobsVec <- c(x, sum(as.integer(nobsBool)))
+    nobsVec <- c(as.integer(x), as.integer(sum(as.integer(nobsBool))))
     names(nobsVec) <- c("id", "nobs")
     nobsVec
   })
   
+  nobsResult <- as.data.frame(nobsResult)
+  #names(nobsResult) <- c("id", "nobs")
   nobsResult
 }
