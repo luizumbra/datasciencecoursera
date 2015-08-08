@@ -41,12 +41,5 @@ complete <- function(directory, id = 1:332) {
     nobsVec
   }))
   
-#  as.array.default(nobsResult)
-  #as.vector.factor(nobsResult)
   as.data.frame.array(nobsResult)
-#  as.data.frame.list(nobsResult)
-#  as.table.default(nobsResult)
-  #as.vector.factor(nobsResult)
-  #as.personList(nobsResult)
-  #nobsResult
 }
