@@ -16,6 +16,9 @@ best <- function(state, outcome) {
   else if (tolower(outcome) == "pneumonia") {
     "Pneumonia"
   }
+  else {
+    stop("invalid outcome")
+  }
   
   # Read csv file
   fileToOutcome <- read.csv(
@@ -30,6 +33,13 @@ best <- function(state, outcome) {
   
   # Eliminate not defined states and verify a valid state
   eliminateBool <- hospitalState == state
+  
+  # Verify invalid state
+  if (sum(as.integer(eliminateBool)) == 0) {
+    stop("invalid state")
+  }
+  
+  # Continue to eliminate not defined states
   hospitalName <- hospitalName[eliminateBool]
   hospitalState <- hospitalState[eliminateBool]
   hospitalMortality <- hospitalMortality[eliminateBool]
