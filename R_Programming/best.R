@@ -6,14 +6,14 @@ best <- function(state, outcome) {
   ## Return hospital name in that state with lowest 30-day death
   ## rate
   
-  # Define the outcome name
+  # Define the outcome name and verify a invalid outcome
   outcome <- if (tolower(outcome) == "heart attack") {
     "Heart.Attack"
   }
   else if (tolower(outcome) == "heart failure") {
     "Heart.Failure"
   }
-  else {
+  else if (tolower(outcome) == "pneumonia") {
     "Pneumonia"
   }
   
@@ -28,7 +28,7 @@ best <- function(state, outcome) {
   hospitalMortality <- fileToOutcome[[
     paste("Hospital.30.Day.Death..Mortality..Rates.from.", outcome, sep = "")]]
   
-  # Eliminate not defined states
+  # Eliminate not defined states and verify a valid state
   eliminateBool <- hospitalState == state
   hospitalName <- hospitalName[eliminateBool]
   hospitalState <- hospitalState[eliminateBool]
@@ -40,18 +40,18 @@ best <- function(state, outcome) {
   hospitalState <- hospitalState[!eliminateBool]
   hospitalMortality <- hospitalMortality[!eliminateBool]
   
-  # Find the less hospitalMortality
-  lessMortality <- 1
-  lessName <- c(as.character(hospitalName[lessMortality]))
+  # Find the less hospitalMortality and put in a indice
+  indiceOfLessMortality <- 1
+  nameLessMortalityHospital <- as.character(hospitalName[indiceOfLessMortality])
   for (i in seq_along(hospitalMortality)) {
-    if (as.numeric(hospitalMortality[lessMortality]) > as.numeric(hospitalMortality[i])) {
-      lessMortality <- i
-      lessName <- as.character(hospitalName[lessMortality])
+    if (as.numeric(as.character(hospitalMortality[i])) < as.numeric(as.character(hospitalMortality[indiceOfLessMortality]))) {
+      indiceOfLessMortality <- i
+      nameLessMortalityHospital <- as.character(hospitalName[indiceOfLessMortality])
     }
-    else if (as.numeric(hospitalMortality[lessMortality]) == as.numeric(hospitalMortality[i])) {
-      lessName <- c(lessName, as.character(hospitalName[i]))
+    else if (as.numeric(as.character(hospitalMortality[i])) == as.numeric(as.character(hospitalMortality[indiceOfLessMortality]))) {
+      nameLessMortalityHospital <- sort(c(nameLessMortalityHospital, as.character(hospitalName[i])))[1]
     }
   }
   
-  sort(lessName)[1]
+  nameLessMortalityHospital
 }
