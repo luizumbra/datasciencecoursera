@@ -53,8 +53,6 @@ rankhospital <- function(state, outcome, num = "best") {
   # Order hospitalMortality rank with bouble-sort
   for (i in seq_along(hospitalMortality)) {
     for (j in i:length(hospitalMortality)) {
-      #readline()
-      #print(paste(as.character(hospitalMortality[i]), "<", as.character(hospitalMortality[j])))
       if (as.numeric(as.character(hospitalMortality[i])) > as.numeric(as.character(hospitalMortality[j]))) {
         
         # Swap hospitalName
@@ -66,6 +64,21 @@ rankhospital <- function(state, outcome, num = "best") {
         aux <- hospitalMortality[i]
         hospitalMortality[i] <- hospitalMortality[j]
         hospitalMortality[j] <- aux[1]
+      }
+      
+      # Sort in alphabetic order
+      else if (as.numeric(as.character(hospitalMortality[i])) == as.numeric(as.character(hospitalMortality[j]))) {
+        if (as.character(hospitalName[i]) > as.character(hospitalName[j])) {
+          # Swap hospitalName
+          aux <- hospitalName[i]
+          hospitalName[i] <- hospitalName[j]
+          hospitalName[j] <- aux
+          
+          # Swap hospitalMortality
+          aux <- hospitalMortality[i]
+          hospitalMortality[i] <- hospitalMortality[j]
+          hospitalMortality[j] <- aux[1]
+        }
       }
     }
   }
@@ -82,5 +95,5 @@ rankhospital <- function(state, outcome, num = "best") {
   }
   
   # Return rank
-  hospitalName
+  hospitalName[num]
 }
