@@ -47,6 +47,7 @@ rankall <- function(outcome, num = "best") {
   
   unname(hospital)
   hospital <- cbind(hospital, state)
+  as.data.frame(hospital)
 }
 
 rankhospital <- function(hospitalName, hospitalState, hospitalMortality, state, num = "best") {
