@@ -66,7 +66,7 @@ rankhospital <- function(state, outcome, num = "best") {
         hospitalMortality[j] <- aux[1]
       }
       
-      # Sort in alphabetic order
+      # Tie case, sort in alphabetical order
       else if (as.numeric(as.character(hospitalMortality[i])) == as.numeric(as.character(hospitalMortality[j]))) {
         if (as.character(hospitalName[i]) > as.character(hospitalName[j])) {
           # Swap hospitalName
